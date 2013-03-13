@@ -1,0 +1,280 @@
+<html> 
+<head>
+<title>Go Bowdoin</title> 
+<link href='http://fonts.googleapis.com/css?family=Rokkitt&subset=latin&v2' rel='stylesheet' type='text/css'>
+<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no">
+ 
+  <style> 
+    
+	body {
+		background:#fff
+		font-size:12px;
+		font-family:Helvetica, Arial, sans-serif;
+    }
+	
+	a {
+		text-decoration:none;
+		target:blank;
+	}
+	a:visited {
+		color: darkblue;
+	}
+	a:hover {
+		color: darkred;
+	}
+	
+	h1 {
+		font-size:48px;
+		margin:0px;
+	}
+	
+	#header {
+		text-align:left;
+		font-size: 16px;
+		font-family: 'Rokkitt', serif;
+	}
+	
+	#logo {
+		float:left;
+	}
+	
+	#info {
+		float:right;
+		text-align: right;
+	}
+	
+	#main {
+		font-size: 14px;
+	}
+	
+	#footer {
+		clear:both;
+		text-align: right;
+		font-size: 14px;
+		padding-top:40px;
+	}
+    
+    .filterform input{
+		 font-size:20px;
+		 padding:3px;
+    }
+	
+	.clear{
+		clear:both;
+	}
+	
+	.hide{ 
+		display:none; 
+	}
+	
+	#container {
+		padding:10px;
+		margin: auto;
+	}
+	
+	ul.multicol {
+		padding: 0px;
+	}
+	
+	@media all and (max-width: 300px) {
+	
+		#container {
+			width:200px;
+		}
+		
+		ul.multicol {
+			width: 200px;
+		}
+		
+		#info {
+			display: none;
+		}
+		
+		h1 {
+			font-size: 24px;
+		}
+	}
+	
+	@media all and (min-width: 301px) and (max-width: 1019px) {
+	
+		#container {
+			width:400px;
+		}
+		
+		ul.multicol {
+			width: 400px;
+		}
+	}
+	
+	@media all and (min-width: 1020px) {
+		
+		#container {
+			width:1000px;
+		}
+		
+		ul.multicol {
+			width: 1000px;
+		}
+	}
+	
+	li { 
+		float: left; 
+		list-style:none;
+		width: 200px;
+		margin: 0px;
+		padding: 0px;
+		text-align: left;
+	}
+	
+	ul li a {
+		display: block;
+		height:35px;
+		padding:10px;
+	}
+	
+	ul li a:hover {
+		background: #f0f0f0;
+	}
+	
+}
+
+		
+   </style> 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+  <script> 
+ 
+(function ($) {
+  // custom css expression for a case-insensitive contains()
+  jQuery.expr[':'].Contains = function(a,i,m){
+      return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
+  };
+ 
+  function filterList(header, list) { 
+  // header is any element, list is an unordered list
+    // create and add the filter form to the header
+    var form = $("<form>").attr({"class":"filterform","action":"#"}),
+        input = $("<input>").attr({"class":"filterinput","type":"text","placeholder":"Link name or keyword","autofocus":"autofocus"});
+    $(form).append(input).appendTo(header);
+ 
+    $(input)
+      .change( function () {
+        var filter = $(this).val();
+        if(filter) {
+ 	  
+		  $matches = $(list).find('a:Contains(' + filter + ')').parent();
+		  $('li', list).not($matches).hide();
+		  $matches.show();
+		    
+        } else {
+          $(list).find("li").show();
+        }
+        return false;
+      })
+    .keyup( function () {
+        // fire the above change event after every letter
+        $(this).change();
+    });
+  }
+ 
+ 
+  //ondomready
+  $(function () {
+    filterList($("#form"), $("#list"));
+  });
+}(jQuery));
+ 
+  </script> 
+ 
+</head> 
+ 
+<body> 
+
+<div id="container">
+
+<div id="header"> 
+  
+	<div id="logo">
+		<h1>Go Bowdoin</h1>
+		<div id="form"></div>
+    </div>
+	
+	<div id="info">
+		<p>Lightweight launchpad
+		<br/>Use tab key to select results
+		<br/>Works great on mobile</p>
+	</div>
+	
+	<div class="clear"></div>
+	
+	
+	
+</div> 
+
+<div id="main">
+  <ul id="list" class="multicol"> 
+		
+		<li><a href="http://academic.bowdoin.edu/academics/calendar/academiccalendar.shtml" target="_blank">Academic Calendar <div class="hide">calandar</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/athletics/index.shtml" target="_blank">Athletics <div class="hide">sports soccer football ice hockey field hockey baskeyball rugby tennis cross country golf sailing volleyball track nordic skiing squash swimming diving lacrosse rowing water polo intramurals</div> </a></li>
+		<li><a href="http://academic.bowdoin.edu/baldwin-program/" target="_blank">Baldwin Program <div class="hide">tutoring study group mentors</div> </a></li>
+		<li><a href="https://bearings.bowdoin.edu/srweb/" target="_blank">Bearings <div class="hide">courses classes selection</div> </a></li>
+		<li><a href="https://blackboard.bowdoin.edu/webapps/login/" target="_blank">Blackboard <div class="hide">classes courses black board</div> </a></li>
+		<li><a href="http://studorgs.bowdoin.edu/bugle/" target="_blank">Bowdoin Bugle <div class="hide">yearbook</div> </a></li>
+		<li><a href="http://studorgs.bowdoin.edu/bcn/" target="_blank">Bowdoin Cable Network <div class="hide">TV</div> </a></li>
+		<li><a href="http://www.bowdoindailysun.com/" target="_blank">Bowdoin Daily Sun <div class="hide">blog news</div> </a></li>
+		<li><a href="http://orient.bowdoin.edu/" target="_blank">The Bowdoin Orient <div class="hide">newspaper paper</div> </a></li>
+		<li><a href="http://www.brunswickdowntown.com/" target="_blank">Brunswick Downtown <div class="hide">restaurants attractions town events</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/about/visiting/building_hours.shtml" target="_blank">Building Hours <div class="hide"></div> </a></li>
+		<li><a href="http://www.bowdoin.edu/bursar/" target="_blank">Bursar's Office <div class="hide">payments</div> </a></li>
+		<li><a href="http://www.fallsearth.com/campus/04011/" target="_blank">Cable Channels <div class="hide">TV television</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/gateway/student/calendar/" target="_blank">Calendar <div class="hide">calandar academic</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/cpc/index.shtml" target="_blank">Career Planning Center <div class="hide">jobs</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/communications/publications/courseCatalogue/index.shtml" target="_blank">College Catalog <div class="hide">courses classes selection</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/counseling/index.shtml" target="_blank">Counseling <div class="hide">counselors</div> </a></li>
+		<li><a href="https://studorgs.bowdoin.edu/coursereviews" target="_blank">Course Reviews <div class="hide">courses rate professors</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/studentaffairs/" target="_blank">Dean's Office <div class="hide"></div> </a></li>
+		<li><a href="http://itunes.apple.com/us/app/bowdoin-dining/id338493682?mt=8" target="_blank">Dining App <div class="hide">Ben Johnson iPhone iOS food menus Thorne Moulton lunch dinner breakfast brunch eating grub</div></a></li>
+		<li><a href="http://www.bowdoin.edu/dining/menus/index.shtml" target="_blank">Dining Menus <div class="hide">food</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/health/index.shtml" target="_blank">Dudley Coe Health Center <div class="hide">doctor sick</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/studentaffairs/student-handbook/" target="_blank">Handbook <div class="hide">student hand book rules</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/it/" target="_blank">Information Technology <div class="hide">IT</div> </a></li>
+		<li><a href="http://www.laundryview.com/" target="_blank">LaundryView <div class="hide"></div> </a></li>
+		<li><a href="http://library.bowdoin.edu/" target="_blank">Library <div class="hide"></div> </a></li>
+		<li><a href="http://www.bowdoin.edu/about/visiting/pdf/restaurantsLodging.pdf" target="_blank">Local Restaurants and Lodgings <div class="hide">brunswick hotels motels</div> </a></li>
+		<li><a href="https://noc.bowdoin.edu/" target="_blank">Network Updates <div class="hide"></div> </a></li>
+		<li><a href="http://academic.bowdoin.edu/ocs/index.shtml" target="_blank">Off Campus Study <div class="hide">off-campus abroad semester</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/onecard/" target="_blank">OneCard <div class="hide">one card</div> </a></li>
+		<li><a href="http://onlinepayment.bowdoin.edu/" target="_blank">Online Payment <div class="hide">bills tuition</div> </a></li>
+		<li><a href="http://academic.bowdoin.edu/qskills/" target="_blank">Quantitative Skills Program <div class="hide">qskills q-skills</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/queer/" target="_blank">Queer Web <div class="hide">lgbt gsa gay straight alliance lesbian transgender transexual bisexual</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/registrar/index.shtml" target="_blank">Registrar <div class="hide">class classes selection</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/reslife/index.shtml" target="_blank">Residential Life <div class="hide">reslife</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/hitch/index.jsp" target="_blank">Ride Board <div class="hide">transportation cars carpools carpooling</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/security/index.shtml" target="_blank">Safety & Security <div class="hide">randy nichols allen</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/security/thebowdoinshuttle/" target="_blank">Shuttle <div class="hide">saferide safe ride</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/campuslife/activities.shtml" target="_blank">Student Activities Office <div class="hide">events</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/studentaid/enrolled/" target="_blank">Student Aid <div class="hide">financial</div> </a></li>
+		<li><a href="http://studentemployment.bowdoin.edu/" target="_blank">Student Employment <div class="hide">jobs</div> </a></li>
+		<li><a href="http://bsg.bowdoin.edu/" target="_blank">Student Government <div class="hide">BSG</div> </a></li>
+		<li><a href="http://www.bowdoin.edu/it/help/" target="_blank">Student Help Desk <div class="hide"></div> </a></li>
+		<li><a href="http://www.bowdoin.edu/facilities/workorder.shtml" target="_blank">Submit Facilities Work Order <div class="hide">facilities facility work-order</div> </a></li>
+		<li><a href="https://www.bowdoin.edu/it/forms/remedy/protected-students" target="_blank">Submit IT Work Order <div class="hide">workorder work-order facilities</div> </a></li>
+		<li><a href="http://staging.bowdoin.edu/it/telecom/student/telephone.shtml" target="_blank">Telephone Services <div class="hide"></div> </a></li>
+		<li><a href="http://www.bowdoin.edu/controller/payroll/timepro.shtml" target="_blank">TimePro <div class="hide">paid protime</div> </a></li>
+		<li><a href="http://flattop.bowdoin.edu/virtualemsenterprise/" target="_blank">Virtual EMS <div class="hide">scheduling schedule</div> </a></li>
+		<li><a href="http://studorgs.bowdoin.edu/wbor" target="_blank">WBOR <div class="hide">radio bowdoin-on-radio</div> </a></li>
+		<li><a href="http://studorgs.bowdoin.edu/wbor/wbor.m3u" target="_blank">WBOR: Listen Now! <div class="hide">radio bowdoin-on-radio</div> </a></li>
+		<li><a href="https://webmail.bowdoin.edu/" target="_blank">Webmail <div class="hide">mail email e-mail</div> </a></li>
+		<li><a href="http://academic.bowdoin.edu/writing-project/" target="_blank">Writing Project <div class="hide"></div> </a></li>
+		
+	</ul> 
+</div> 
+
+<div id="footer">
+<img src="logo-sm.jpg" title="a SWAT op / 2011">
+</div>
+
+</div>
+
+</body>
+</html>
+
